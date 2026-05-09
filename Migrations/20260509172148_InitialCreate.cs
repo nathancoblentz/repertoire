@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CoblentzContext.Migrations
 {
     /// <inheritdoc />
-    public partial class FinalStabilizedReset : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,10 +17,10 @@ namespace CoblentzContext.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -31,21 +31,21 @@ namespace CoblentzContext.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    PasswordHash = table.Column<string>(type: "TEXT", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "INTEGER", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -56,9 +56,9 @@ namespace CoblentzContext.Migrations
                 name: "Projects",
                 columns: table => new
                 {
-                    ProjectId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,11 +69,11 @@ namespace CoblentzContext.Migrations
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -90,11 +90,11 @@ namespace CoblentzContext.Migrations
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    ClaimType = table.Column<string>(type: "TEXT", nullable: true),
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -111,10 +111,10 @@ namespace CoblentzContext.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false)
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -131,8 +131,8 @@ namespace CoblentzContext.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -155,10 +155,10 @@ namespace CoblentzContext.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -175,13 +175,15 @@ namespace CoblentzContext.Migrations
                 name: "Song",
                 columns: table => new
                 {
-                    SongId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Artist = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false)
+                    SongId = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Artist = table.Column<string>(type: "TEXT", nullable: false),
+                    ProjectId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Status = table.Column<string>(type: "TEXT", nullable: false),
+                    YouTubeUrl = table.Column<string>(type: "TEXT", nullable: true),
+                    SongChart = table.Column<string>(type: "TEXT", nullable: true),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -190,8 +192,7 @@ namespace CoblentzContext.Migrations
                         name: "FK_Song_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Song_Projects_ProjectId",
                         column: x => x.ProjectId,
@@ -204,8 +205,8 @@ namespace CoblentzContext.Migrations
                 name: "Favorites",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(128)", nullable: false),
-                    SongId = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
+                    SongId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -251,13 +252,13 @@ namespace CoblentzContext.Migrations
 
             migrationBuilder.InsertData(
                 table: "Song",
-                columns: new[] { "SongId", "Artist", "ProjectId", "Status", "Title", "UserId" },
+                columns: new[] { "SongId", "Artist", "ProjectId", "SongChart", "Status", "Title", "UserId", "YouTubeUrl" },
                 values: new object[,]
                 {
-                    { 1, "Kings of Leon", 1, "Learning", "Mi Amigo", "admin-user-id" },
-                    { 2, "Prince", 2, "Ready", "I Wanna Be Your Lover", "admin-user-id" },
-                    { 3, "Phish", 3, "Ready", "The Final Hurrah", "admin-user-id" },
-                    { 4, "Gorillaz", 2, "Learning", "Clint Eastwood", "admin-user-id" }
+                    { 1, "Kings of Leon", 1, null, "Learning", "Mi Amigo", "admin-user-id", null },
+                    { 2, "Prince", 2, null, "Ready", "I Wanna Be Your Lover", "admin-user-id", null },
+                    { 3, "Phish", 3, null, "Ready", "The Final Hurrah", "admin-user-id", null },
+                    { 4, "Gorillaz", 2, null, "Learning", "Clint Eastwood", "admin-user-id", null }
                 });
 
             migrationBuilder.CreateIndex(
@@ -269,8 +270,7 @@ namespace CoblentzContext.Migrations
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
@@ -296,8 +296,7 @@ namespace CoblentzContext.Migrations
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Favorites_SongId",

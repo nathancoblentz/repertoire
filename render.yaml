@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: coblentz-context
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /account/login/
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production

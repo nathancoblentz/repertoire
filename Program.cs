@@ -4,12 +4,21 @@ using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// --- RENDER PORT BINDING ---
+// Render sets the PORT environment variable. Bind to 0.0.0.0 so the container
+// is reachable from outside. Falls back to default Kestrel URLs for local dev.
+var port = Environment.GetEnvironmentVariable("PORT");
+if (!string.IsNullOrEmpty(port))
+{
+    builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
+}
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
 builder.Services.AddSession(options => options.IdleTimeout = TimeSpan.FromSeconds(60 * 1));
 
 builder.Services.AddDbContext<CoblentzContext.Models.CoblentzContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("CoblentzContext")));
+    options.UseSqlite("Data Source=repertoire.db"));
 
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
@@ -34,13 +43,14 @@ builder.Services.AddResponseCompression(options =>
 
 var app = builder.Build();
 
-// Enable compression middleware
-app.UseResponseCompression();
-
-// --- STARTUP LOGIC: Database Seeding & User Management ---
-// We use a scope here to ensure the Admin account exists on first launch
+// --- STARTUP LOGIC: Database Migration & Seeding ---
+// Apply pending migrations on startup. This creates the .db file and all tables
+// automatically, which is essential on Render where the disk is ephemeral.
 using (var scope = app.Services.CreateScope())
 {
+    var dbContext = scope.ServiceProvider.GetRequiredService<CoblentzContext.Models.CoblentzContext>();
+    dbContext.Database.Migrate();
+
     var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
     var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     
@@ -70,7 +80,14 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+// Enable compression middleware
+app.UseResponseCompression();
+
+// NOTE: UseHttpsRedirection() is intentionally omitted.
+// Render terminates TLS at the reverse proxy. Adding HTTPS redirect here
+// causes infinite redirect loops in production.
+
+app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
