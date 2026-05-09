@@ -122,7 +122,7 @@ namespace CoblentzContext.Controllers
                 if (song != null)
                 {
                     // Set feedback message
-                    TempData["message"] = $"{song.Title} added to favorites (not persistent)";
+                    TempData["message"] = $"{song.Title} added to favorites";
                 
                     // COOKIE LOGIC: Track the last interaction (User-Specific)
                     SongCookies cookies = new SongCookies(Response.Cookies);
