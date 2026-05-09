@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: coblentz-context
+    name: repertoire
     runtime: docker
     plan: free
     region: oregon
