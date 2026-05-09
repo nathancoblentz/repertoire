@@ -40,6 +40,18 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
     options.Password.RequireLowercase = false;
 }).AddEntityFrameworkStores<CoblentzContext.Models.CoblentzContext>().AddDefaultTokenProviders();
 
+// --- COOKIE CONFIGURATION FOR REVERSE PROXY ---
+// Render proxies HTTPS → HTTP. ForwardedHeaders makes ASP.NET aware of the original
+// HTTPS scheme, but we also explicitly configure the cookie to be safe behind proxies.
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    options.Cookie.SameSite = SameSiteMode.Lax;
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Account/AccessDenied";
+});
+
 // --- REQUIREMENT: Enable Lowercase URLs and Trailing Slashes via Routing Settings ---
 builder.Services.AddRouting(options => {
     options.LowercaseUrls = true;
