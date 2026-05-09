@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using CoblentzContext.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,16 @@ if (!string.IsNullOrEmpty(port))
 {
     builder.WebHost.UseUrls($"http://0.0.0.0:{port}");
 }
+
+// --- REVERSE PROXY SUPPORT ---
+// Render terminates TLS at the edge and forwards HTTP to the app.
+// Without this, ASP.NET thinks the request is HTTP and won't set Secure auth cookies.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+    options.KnownNetworks.Clear();
+    options.KnownProxies.Clear();
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddMemoryCache();
@@ -79,6 +90,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+// Must be first — rewrites the scheme to HTTPS so auth cookies work behind Render's proxy
+app.UseForwardedHeaders();
 
 // Enable compression middleware
 app.UseResponseCompression();
