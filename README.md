@@ -20,7 +20,7 @@ CoblentzContext is a premium ASP.NET Core MVC application designed for musicians
 | **Cookies** | `SongCookies.cs` manages Theme preference and Last Interacted Song via browser cookies |
 | **Trailing Slash** | `AppendTrailingSlash = true` in `Program.cs` routing options |
 | **Lowercase Addresses** | `LowercaseUrls = true` in `Program.cs` routing options (not hardcoded) |
-| **Database Setup** | NuGet: `Microsoft.EntityFrameworkCore.SqlServer`. Context: `Models/CoblentzContext.cs` |
+| **Database Setup** | NuGet: `Microsoft.EntityFrameworkCore.Sqlite`. Context: `Models/CoblentzContext.cs` |
 | **Models (3 Classes)** | `Song.cs`, `Project.cs`, `User.cs` with navigation properties and data annotations |
 | **CRUD lifecycle** | Complete Add (with Status dropdown), Edit, and Delete workflow with confirmations |
 
@@ -51,8 +51,8 @@ CoblentzContext is a premium ASP.NET Core MVC application designed for musicians
 ---
 
 ## 🛠️ Technical Specifications
-- **Framework**: ASP.NET Core 8.0 MVC (.NET 9 Runtime)
-- **Database**: MS SQL Server LocalDB with EF Core Migrations
+- **Framework**: ASP.NET Core 9.0 MVC (.NET 9 Runtime)
+- **Database**: SQLite with EF Core Migrations
 - **Security**: ASP.NET Identity Core with role-based access (Admin/Member)
 - **UX/UI**: Bootstrap 5.3 + FontAwesome 6 + JQuery + Pulse.css Logic
 - **Performance**: Async controllers, `AsNoTracking()`, Gzip response compression
