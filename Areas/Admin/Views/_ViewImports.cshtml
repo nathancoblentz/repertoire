@@ -1,0 +1,12 @@
+﻿@* Pseudocode plan:
+   1. Diagnose: CS0234 indicates `CoblentzContext.Models` namespace is not found.
+   2. Minimal safe fix: remove the invalid `@using CoblentzContext.Models` line so the compile error is resolved.
+   3. Keep existing valid usings and tag helpers unchanged.
+   4. If your model types live under a different namespace (e.g. `CoblentzContextData.Models` or `MyApp.Models`),
+      re-add the correct `@using` after you confirm the actual namespace.
+*@
+
+@using CoblentzContext
+@using CoblentzContext.Models
+@* @using CoblentzContext.Areas.Admin.Models; *@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers

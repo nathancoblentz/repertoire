@@ -1,0 +1,31 @@
+@model Project
+@{
+    string action = Model.ProjectId == 0 ? "Add" : "Edit";
+    ViewData["Title"] = action + " Project";
+}
+
+<div class="card shadow-sm col-md-6 mx-auto mt-5">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="fa-solid fa-folder-plus"></i> @ViewData["Title"]</h4>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">Project Name</label>
+                <input asp-for="Name" class="form-control" placeholder="Enter project name..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <input type="hidden" asp-for="ProjectId" />
+
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="fa-solid fa-check"></i> Save Project
+                </button>
+                <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

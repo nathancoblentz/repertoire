@@ -1,0 +1,197 @@
+<!--
+Documentation from README.md
+ -->
+
+@{
+    ViewData["Title"] = "Documentation";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="display-1 fw-bold text-primary mb-3">
+                <i class="fa-solid fa-file-code"></i> Documentation
+            </h1>
+            <p class="lead text-muted mb-5">Full project specifications and grading matrix for CoblentzContext.</p>
+
+            <div class="card shadow-premium border-0 p-4 p-md-5 rounded-4 glass-card">
+                <div class="readme-content">
+                    <h1 class="h2 fw-bold border-bottom pb-3 mb-4">Project Overview</h1>
+                    <p class="mb-4">CoblentzContext is a premium ASP.NET Core MVC application designed for musicians to
+                        manage their song repertoire, organize work into project-specific catalogs, and maintain a
+                        personalized collection of favorites. Each song can link to YouTube reference videos and lead
+                        sheet charts for quick stage-side access.</p>
+
+                    <h2 class="h4 fw-bold text-primary mt-5"><i class="fa-solid fa-graduation-cap me-2"></i> Final
+                        Assignment Requirements Matrix</h2>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-bordered shadow-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 30%;">Requirement</th>
+                                    <th>Implementation Detail</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">Admin Section</td>
+                                    <td class="fw-bold">Dedicated Admin Area protected by Identity [Authorize]. Admin
+                                        account seeded on startup.</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Area: About (2+ Views)</td>
+                                    <td class="fw-bold">About Area with General Guide and Documentation views</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Action: Multiple Views</td>
+                                    <td class="fw-bold">About/HomeController.Index(string id) returns different views
+                                        based on route ID</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Area-Specific Layouts</td>
+                                    <td class="fw-bold">Admin and About areas each have their own _ViewStart pointing to
+                                        unique layouts</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Sessions</td>
+                                    <td class="fw-bold">Session tracks visit start time, displayed as a badge on the
+                                        Home page</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Cookies</td>
+                                    <td class="fw-bold">SongCookies.cs manages Theme preference and Last Interacted Song
+                                        via browser cookies</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Trailing Slash</td>
+                                    <td class="fw-bold">AppendTrailingSlash = true in Program.cs routing options</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Lowercase URLs</td>
+                                    <td class="fw-bold">LowercaseUrls = true in Program.cs routing options (not
+                                        hardcoded)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Database Setup</td>
+                                    <td class="fw-bold">NuGet: Microsoft.EntityFrameworkCore.SqlServer. Context:
+                                        Models/CoblentzContext.cs</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Models (3 Classes)</td>
+                                    <td class="fw-bold">Song.cs, Project.cs, User.cs with navigation properties and data
+                                        annotations</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Data Transfer</td>
+                                    <td class="fw-bold">Strongly typed @@model in all views. ViewBag for supplemental
+                                        data (favorites, projects)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Bootstrap</td>
+                                    <td class="fw-bold">Bootstrap 5 grid, cards, tables, badges, dropdowns, and
+                                        responsive breakpoints</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">CRUD Lifecycle</td>
+                                    <td class="fw-bold">Add, Edit, and Delete functionality in Admin/SongsController
+                                        with confirmation views</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Smart Filters</td>
+                                    <td class="fw-bold">Real-time client-side search filtering on Home and Admin Manage
+                                        pages</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Dynamic Sorting</td>
+                                    <td class="fw-bold">Multidirectional column sorting logic implemented for all song
+                                        repertoire tables</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Interactive UI</td>
+                                    <td class="fw-bold">CSS animations (heart pulse), dashboard cards, and
+                                        mobile-responsive layouts</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2 class="h4 fw-bold text-primary mt-5"><i class="fa-solid fa-play me-2"></i> Video Script
+                        Highlights</h2>
+                    <ul class="list-group list-group-flush bg-transparent">
+                        <li class="list-group-item bg-transparent px-0 py-3"><strong>1. Dashboard & Search:</strong>
+                            Show the Home stats cards. Use the search bar to filter for an artist instanty. Sort by
+                            Project or Status.</li>
+                        <li class="list-group-item bg-transparent px-0 py-3"><strong>2. Sessions & Cookies:</strong>
+                            Show "Session Started" badge. Toggle Dark Mode (cookie persistence). Show the heartbeat
+                            animation on Favorites toggle.</li>
+                        <li class="list-group-item bg-transparent px-0 py-3"><strong>3. Catalog System:</strong>
+                            Navigate to Catalogs, show YouTube/Chart resource icons, and demo the specialized Print
+                            mode.</li>
+                        <li class="list-group-item bg-transparent px-0 py-3"><strong>4. Admin CRUD:</strong> Add a song
+                            via the Admin area using the new Status dropdown, then verify it appears in the master list.
+                        </li>
+                        <li class="list-group-item bg-transparent px-0 py-3"><strong>5. Routing & Docs:</strong> Point
+                            out lowercase URLs. Show the About area's data-driven routing logic (one action, multiple
+                            views).</li>
+                    </ul>
+
+                    <h2 class="h4 fw-bold text-primary mt-5"><i class="fa-solid fa-microchip me-2"></i> Technical
+                        Specifications</h2>
+                    <ul class="list-unstyled mt-3">
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Framework: ASP.NET Core 8.0
+                            MVC (.NET 9 Runtime)</li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Database: MS SQL Server
+                            LocalDB / EF Core Migrations</li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Security: ASP.NET Identity
+                            with role-based access (Admin / Member)</li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Styling: Bootstrap 5.3 /
+                            FontAwesome 6 / Custom CSS</li>
+                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i> Performance: Async
+                            controllers, AsNoTracking, Gzip compression</li>
+                    </ul>
+
+                    <h2 class="h4 fw-bold text-primary mt-5"><i class="fa-solid fa-sitemap me-2"></i> Project Structure
+                    </h2>
+                    <div class="table-responsive mt-3">
+                        <table class="table table-sm table-bordered shadow-sm">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Folder</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="fw-bold">Areas/Admin/</td>
+                                    <td>Protected repertoire management (Add, Edit, Delete songs & projects)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Areas/About/</td>
+                                    <td>General Guide and this Documentation page</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Controllers/</td>
+                                    <td>Public controllers: Home, Project catalogs, Account (login/register)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Models/</td>
+                                    <td>Song, Project, User, Favorite, SongCookies, CoblentzContext (DbContext)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">Migrations/</td>
+                                    <td>EF Core database version history (schema changes tracked over time)</td>
+                                </tr>
+                                <tr>
+                                    <td class="fw-bold">wwwroot/css/</td>
+                                    <td>site.css — dark mode, nav hover effects, print styles</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

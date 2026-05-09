@@ -1,0 +1,47 @@
+@model Project
+@{
+    ViewData["Title"] = "Delete Project";
+}
+
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-danger text-white p-4">
+                    <h3 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Confirm Project Deletion
+                    </h3>
+                </div>
+                <div class="card-body p-4 p-md-5 text-center">
+                    <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                        <i class="fa-solid fa-folder-minus fa-2x text-danger"></i>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-4">@Model.Name</h4>
+                    
+                    <p class="mb-4">
+                        You are about to permanently remove this project. 
+                        <strong>Warning:</strong> Any songs currently assigned to this project will lose their reference and appear as "No Project".
+                    </p>
+
+                    <form asp-area="Admin" asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="ProjectId" />
+                        <input type="hidden" asp-for="Name" />
+                        <div class="d-grid gap-2">
+                             <button type="submit" class="btn btn-danger btn-lg shadow">
+                                <i class="fa-solid fa-check"></i> Yes, Delete Project
+                            </button>
+                            <a asp-area="Admin" asp-controller="Projects" asp-action="Index" class="btn btn-outline-secondary btn-lg border-0">
+                                No, Keep Project
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <p class="text-center text-muted mt-4 small">
+                This action cannot be undone. System integrity for linked songs is maintained.
+            </p>
+        </div>
+    </div>
+</div>

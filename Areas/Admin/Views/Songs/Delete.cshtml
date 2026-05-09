@@ -1,0 +1,47 @@
+@model Song
+@{
+    ViewData["Title"] = "Delete Song";
+}
+
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-danger text-white p-4">
+                    <h3 class="mb-0 fw-bold">
+                        <i class="fa-solid fa-triangle-exclamation"></i> Confirm Deletion
+                    </h3>
+                </div>
+                <div class="card-body p-4 p-md-5 text-center">
+                    <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-4" style="width: 80px; height: 80px;">
+                        <i class="fa-solid fa-trash-can fa-2x text-danger"></i>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-2">@Model.Title</h4>
+                    <p class="text-muted mb-4 small text-uppercase fw-bold">by @Model.Artist</p>
+                    
+                    <p class="mb-4">
+                        You are about to permanently remove this song from the master repertoire. 
+                        This action cannot be undone.
+                    </p>
+
+                    <form asp-area="Admin" asp-action="Delete" method="post">
+                        <input type="hidden" asp-for="SongId" />
+                        <div class="d-grid gap-2">
+                             <button type="submit" class="btn btn-danger btn-lg shadow">
+                                <i class="fa-solid fa-check"></i> Yes, Delete Song
+                            </button>
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg border-0">
+                                No, Keep Song
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <p class="text-center text-muted mt-4 small">
+                Deleting a song removes it from all project catalogs and user favorites.
+            </p>
+        </div>
+    </div>
+</div>

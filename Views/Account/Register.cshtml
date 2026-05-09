@@ -1,0 +1,68 @@
+<!--
+    Register View
+    This view is displayed when a user tries to register an account.
+-->
+
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="container py-5 mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow border-0">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fa-solid fa-user-plus fa-3x text-info mb-3"></i>
+                        <h2 class="fw-bold">Join the Stage</h2>
+                        <p class="text-muted">Create an account to save your favorites</p>
+                    </div>
+
+                    <form method="post" asp-action="Register">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3"></div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="UserName" class="form-control" placeholder="Username" id="regUsername" />
+                            <label asp-for="UserName" for="regUsername">Choose a Username</label>
+                            <span asp-validation-for="UserName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="Password" type="password" class="form-control" placeholder="Password"
+                                id="regPassword" />
+                            <label asp-for="Password" for="regPassword">Strong Password</label>
+                            <span asp-validation-for="Password" class="text-danger small"></span>
+                        </div>
+
+                        <div class="form-floating mb-4">
+                            <input asp-for="ConfirmPassword" type="password" class="form-control"
+                                placeholder="Confirm Password" id="confPassword" />
+                            <label asp-for="ConfirmPassword" for="confPassword">Confirm Password</label>
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-grid mb-4">
+                            <button type="submit" class="btn btn-info btn-lg shadow-sm fw-bold">
+                                <i class="fa-solid fa-check-circle me-2"></i> Register Account
+                            </button>
+                        </div>
+
+                        <div class="text-center">
+                            <p class="text-muted small">
+                                Already have an account?
+                                <a asp-action="Login" class="text-info fw-bold text-decoration-none">Sign in here</a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a asp-controller="Home" asp-action="Index" class="text-muted text-decoration-none small">
+                    <i class="fa-solid fa-arrow-left"></i> Take me back to the repertoire
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

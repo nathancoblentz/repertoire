@@ -1,0 +1,303 @@
+/* ---------------------------------------------------------
+   GLOBAL STYLES & RESET
+--------------------------------------------------------- */
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    margin-bottom: 60px;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Custom Scrollbar --- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+.dark-mode ::-webkit-scrollbar-track {
+    background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+.dark-mode ::-webkit-scrollbar-thumb {
+    background: #444;
+}
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+    background: #666;
+}
+
+/* ---------------------------------------------------------
+   NAVIGATION & BRANDING
+--------------------------------------------------------- */
+.navbar-nav .nav-link {
+    transition: color 0.2s ease, transform 0.2s ease, border-bottom 0.2s ease;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 5px;
+}
+
+.navbar-nav .nav-link:not(.active):hover {
+    color: #0dcaf0 !important;
+    transform: translateY(-2px);
+    border-bottom: 2px solid #0dcaf0;
+}
+
+.navbar-nav .nav-link.active {
+    color: #0dcaf0 !important;
+    border-bottom: 2px solid #0dcaf0;
+    font-weight: 600;
+    cursor: default;
+    pointer-events: none;
+}
+
+.navbar-nav .nav-link.active.dropdown-toggle {
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.navbar-brand {
+    transition: transform 0.3s ease;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+/* ---------------------------------------------------------
+   DARK MODE SYSTEM
+--------------------------------------------------------- */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode .card,
+.dark-mode .card-body {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode table,
+.dark-mode .table {
+    color: #e0e0e0 !important;
+    border-color: #444 !important;
+    background-color: transparent !important;
+}
+
+.dark-mode .table thead th,
+.dark-mode .table thead td {
+    background-color: #000 !important;
+    color: #fff !important;
+    border-color: #444 !important;
+}
+
+.dark-mode .table-striped>tbody>tr:nth-of-type(odd)>* {
+    background-color: #1a1a1a !important;
+    color: #e0e0e0 !important;
+    box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.02);
+}
+
+.dark-mode .table-striped>tbody>tr:nth-of-type(even)>* {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .table-hover tbody tr:hover>* {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+}
+
+.dark-mode .table td,
+.dark-mode .table th {
+    background-color: transparent !important;
+    border-color: #333 !important;
+}
+
+.dark-mode .badge.bg-secondary {
+    background-color: #444 !important;
+    border: 1px solid #666;
+}
+
+.dark-mode .list-group-item {
+    background-color: #1e1e1e;
+    border-color: #333;
+    color: #e0e0e0;
+}
+
+.dark-mode .form-control,
+.dark-mode .form-select {
+    background-color: #2c2c2c;
+    border-color: #444;
+    color: #fff;
+}
+
+.dark-mode .form-control:focus {
+    background-color: #333;
+    color: #fff;
+}
+
+.dark-mode .modal-content {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.dark-mode .text-muted {
+    color: #999 !important;
+}
+
+.dark-mode .footer {
+    background-color: #1a1a1a;
+    border-top-color: #333;
+    color: #888;
+}
+
+/* ---------------------------------------------------------
+   PREMIUM POLISH (Glass, Gradients, Shadows)
+--------------------------------------------------------- */
+.glass-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.dark-mode .glass-card {
+    background: rgba(30, 30, 30, 0.7) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+.text-gradient {
+    background: linear-gradient(135deg, #0d6efd, #0dcaf0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dark-mode .text-gradient {
+    background: linear-gradient(135deg, #3d8bfd, #0dcaf0);
+    -webkit-background-clip: text;
+}
+
+.shadow-premium {
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1), 0 5px 15px -5px rgba(0, 0, 0, 0.05) !important;
+}
+
+.dark-mode .shadow-premium {
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5) !important;
+}
+
+.hover-lift {
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175) !important;
+}
+
+/* ---------------------------------------------------------
+   CUSTOM COMPONENTS & TABLES
+--------------------------------------------------------- */
+.table th {
+    background: var(--bs-secondary);
+    color: white;
+}
+
+.alert-info.shadow-sm {
+    border-left: 5px solid #0dcaf0;
+}
+
+@keyframes heart-pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.pulse-hover:hover {
+    animation: heart-pulse 0.8s infinite cubic-bezier(0.215, 0.61, 0.355, 1);
+    color: #ff4757 !important;
+}
+
+/* ---------------------------------------------------------
+   ABOUT / README CONTENT STYLES
+--------------------------------------------------------- */
+.readme-content strong,
+.readme-content .fw-bold {
+    color: #212529;
+    transition: color 0.3s;
+}
+
+.dark-mode .readme-content strong,
+.dark-mode .readme-content .fw-bold {
+    color: #ced4da !important;
+}
+
+.dark-mode .readme-content {
+    color: #adb5bd;
+}
+
+.dark-mode .readme-content td {
+    color: #ced4da;
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE OVERRIDES (Mobile First)
+--------------------------------------------------------- */
+@media (max-width: 767.98px) {
+    .display-1 {
+        font-size: 2.5rem !important; /* Scale down hero titles for mobile */
+    }
+    
+    .card-body {
+        padding: 1.25rem !important;
+    }
+
+    /* Stack stats tighter on small phones */
+    .display-6 {
+        font-size: 1.75rem !important;
+    }
+
+    /* Optimized table scrolling for touch */
+    .table-responsive {
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .dark-mode .table-responsive {
+        border-color: #333;
+    }
+
+    /* Ensure buttons are large enough for thumbs */
+    .btn-sm {
+        padding: 0.5rem 0.75rem;
+    }
+
+    /* Navbar brand scaling */
+    .navbar-brand {
+        font-size: 1.15rem;
+    }
+    
+    /* Hero section spacing */
+    .container.py-4 {
+        padding-top: 1.5rem !important;
+    }
+}

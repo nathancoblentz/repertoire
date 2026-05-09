@@ -1,0 +1,46 @@
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 overflow-hidden">
+                <div class="card-header bg-dark text-white p-4">
+                    <h2 class="mb-0 fw-bold"><i class="fa-solid fa-shield-halved text-info"></i> Privacy & Data Policy</h2>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <h4 class="fw-bold">Your Musical Data</h4>
+                    <p class="text-muted">At CoblentzContext, we prioritize the integrity of your musical repertoire. This policy explains how we handle your information.</p>
+                    
+                    <hr class="my-4" />
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary"><i class="fa-solid fa-database me-2"></i> Persistent Storage</h5>
+                        <p>When you create an account, your **Favorites** and **Songs** are stored securely in our centralized database. This information is private to your account and is used solely to provide your personal repertoire dashboard.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary"><i class="fa-solid fa-cookie-bite me-2"></i> Browser Cookies</h5>
+                        <p>We use small data files called "Cookies" to remember your UI preferences, such as your **Theme Choice (Dark/Light Mode)** and your **Recently Actioned Songs**. These are stored locally on your device and are not used for tracking or advertising.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5 class="fw-bold text-primary"><i class="fa-solid fa-user-lock me-2"></i> Administrative Security</h5>
+                        <p>Only users with the **"Admin"** role can modify the master project list and the global repertoire database. Your personal collection (Favorites) is yours alone.</p>
+                    </div>
+
+                    <div class="alert alert-info border-0 shadow-sm mt-4">
+                        <i class="fa-solid fa-circle-info"></i> <strong>Note:</strong> We do not share your data with third parties. Your repertoire is your own.
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-arrow-left"></i> Return to Repertoire
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

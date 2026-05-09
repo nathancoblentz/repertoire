@@ -1,0 +1,766 @@
+<!--
+Main layout for CoblentzContext
+-->
+
+@{
+    // get theme from cookies
+
+    var cookies = new SongCookies(Context.Request.Cookies);
+    var currentTheme = cookies.GetTheme();
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CoblentzContext</title>
+    <script type="importmap"></script>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/CoblentzContext.styles.css" asp-append-version="true" />
+</head>
+
+<body class="@(currentTheme == "dark" ? "dark-mode" : "")">
+    <header>
+
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark bar-toggleable-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light fw-bold" asp-area="" asp-controller="Home" asp-action="Index">
+                    <i class="fa-solid fa-guitar text-info"></i> Coblentz<span class="text-info">Context</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between" id="navbarCollapse">
+                    @{
+                        var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        var currentArea = ViewContext.RouteData.Values["Area"]?.ToString();
+                    }
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item me-4">
+                            <a class="nav-link text-light @(currentController == "Home" && currentAction == "Index" && currentArea == null ? "active" : "")"
+                                asp-area="" asp-controller="Home" asp-action="Index">
+                                <i class="fa-solid fa-house"></i> Home
+                            </a>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {
+                            <li class="nav-item me-4">
+                                <a class="nav-link text-light @(currentArea == "Admin" && currentController == "Home" ? "active" : "")"
+                                    asp-area="Admin" asp-controller="Home" asp-action="Index">
+                                    <i class="fa-solid fa-music"></i> Manage
+                                </a>
+                            </li>
+                            @if (User.IsInRole("Admin"))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                            {
+                                <li class="nav-item me-4">
+                                    <a class="nav-link text-light @(currentController == "Projects" ? "active" : "")"
+                                        asp-area="Admin" asp-controller="Projects" asp-action="Index">
+                                        <i class="fa-solid fa-folder-tree"></i> Projects
+                                    </a>
+                                </li>
+                            }
+                        }
+                        <li class="nav-item me-4">
+                            <a class="nav-link text-light @(currentController == "Project" ? "active" : "")" asp-area=""
+                                asp-controller="Project" asp-action="Index">
+                                <i class="fa-solid fa-layer-group"></i> Catalogs
+                            </a>
+                        </li>
+                        <li class="nav-item me-4">
+                            <a class="nav-link text-light @(currentAction == "Favorites" ? "active" : "")" asp-area=""
+                                asp-controller="Home" asp-action="Favorites">
+                                <i class="fa-solid fa-heart"></i> Favorites
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-light @(currentArea == "About" ? "active" : "")"
+                                href="#" id="navbarAboutDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa-solid fa-circle-info"></i> About
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark shadow" aria-labelledby="navbarAboutDropdown">
+                                <li><a class="dropdown-item" asp-area="About" asp-controller="About" asp-action="Index"
+                                        asp-route-id="General">General Guide</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item fw-bold text-info" asp-area="About" asp-controller="About"
+                                        asp-action="Index" asp-route-id="Documentation">Documentation</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        <li class="nav-item me-3 border-end pe-3 border-secondary d-none d-sm-block">
+                            <form asp-controller="Home" asp-action="ToggleTheme" asp-area="" method="post">
+                                <button type="submit" class="btn btn-outline-info btn-sm mt-1">
+                                    <i class="fa-solid @(currentTheme == "dark" ? "fa-sun" : "fa-moon")"></i>
+                                    @(currentTheme == "dark" ? "Light" : "Dark")
+                                </button>
+                            </form>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="text-light me-3 small d-none d-lg-inline">@User.Identity?.Name</span>
+                                <form method="post" asp-action="Logout" asp-controller="Account" asp-area="">
+                                    <button type="submit" class="btn btn-sm btn-outline-light">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Log Out
+                                    </button>
+                                </form>
+                            </li>
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        else
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        {
+                            <li class="nav-item me-2">
+                                <a class="btn btn-sm btn-outline-info" asp-action="Register" asp-controller="Account"
+                                    asp-area="">
+                                    <i class="fa-solid fa-user-plus"></i> Register
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-sm btn-info text-dark" asp-action="Login" asp-controller="Account"
+                                    asp-area="">
+                                    <i class="fa-solid fa-right-to-bracket"></i> Log In
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        @if (TempData["message"] != null)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {
+            <!-- Message -->
+            <div class="alert alert-success alert-dismissible fade show shadow" role="alert">
+                <i class="fa-solid fa-circle-check"></i> @TempData["message"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        else if (TempData["ShowWelcome"] != null)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Welcome message
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value ?? "";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            var lastSong = cookies.GetLastInteractedSong(userId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Show last song if it exists
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if (!string.IsNullOrEmpty(lastSong))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            {
+                <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    Welcome back, <strong>@User.Identity?.Name</strong>! You recently added <strong>@lastSong</strong> to your
+                    favorites.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+        <main role="main" class="pb-5">
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="border-top footer text-muted mt-auto py-4 bg-dark bg-opacity-10">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <span class="small fw-bold text-uppercase">&copy; 2026 - <span
+                            class="text-info">Coblentz</span>Context Repertoire</span>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a asp-area="About" asp-controller="About" asp-action="Index" asp-route-id="General"
+                        class="text-decoration-none text-muted me-3 small hover-info">Guide</a>
+                    <a asp-area="About" asp-controller="About" asp-action="Index" asp-route-id="Documentation"
+                        class="text-decoration-none text-muted me-3 small hover-info">Docs</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Privacy"
+                        class="text-decoration-none text-muted small hover-info">Privacy</a>
+                    <span class="ms-3 border-start ps-3 border-secondary">
+                        <i class="fa-brands fa-github opacity-50 me-2"></i>
+                        <i class="fa-solid fa-code opacity-50"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Render section for scripts -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

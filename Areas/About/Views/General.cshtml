@@ -1,0 +1,120 @@
+<!--
+General Guide from README.md
+-->
+
+@{
+    ViewData["Title"] = "General Guide";
+}
+
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <h1 class="display-1 fw-bold text-primary mb-3">
+                <i class="fa-solid fa-circle-info"></i> General Guide
+            </h1>
+            <p class="lead text-muted mb-5">Everything you need to know about CoblentzContext in one place.</p>
+
+            <!-- Feature Overview Cards -->
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 p-3">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-primary"><i class="fa-solid fa-layer-group me-2"></i> Project
+                                Catalogs</h5>
+                            <p class="text-muted">Projects act as containers for your work. Every project has a
+                                dedicated <strong>Catalog</strong> page designed for stage use and printing.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 p-3">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-info"><i class="fa-solid fa-magnifying-glass me-2"></i> Smart Search
+                            </h5>
+                            <p class="text-muted">Instantly filter the master repertoire by title or artist. Real-time
+                                client-side processing means you find what you need without waiting.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 p-3">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-success"><i class="fa-solid fa-chart-line me-2"></i> Dashboard
+                                Metrics</h5>
+                            <p class="text-muted">A dynamic stats overview tracks your progress, showing total counts
+                                for songs, favorites, and readiness levels at a glance.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm border-0 p-3">
+                        <div class="card-body">
+                            <h5 class="fw-bold text-danger"><i class="fa-solid fa-heart me-2"></i> Interactive
+                                Collection</h5>
+                            <p class="text-muted">Save favorites with a single click. Every interaction includes visual
+                                heart-beat feedback and persistent database storage.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Start Tutorial -->
+        <h3 class="fw-bold mt-5 mb-4"><i class="fa-solid fa-graduation-cap text-success me-2"></i> Quick Start</h3>
+
+        <div class="list-group list-group-flush shadow-sm rounded-4 overflow-hidden border">
+            <div class="list-group-item p-4">
+                <h5 class="fw-bold mb-2"><span class="badge bg-success me-2">1</span> Secure Your Collection</h5>
+                <p class="text-muted mb-0">Register and sign in. This unlocks <strong>Deep Storage</strong> — your
+                    favorites are saved to your account in the database, not just your browser.</p>
+            </div>
+            <div class="list-group-item p-4">
+                <h5 class="fw-bold mb-2"><span class="badge bg-success me-2">2</span> Use Project Catalogs</h5>
+                <p class="text-muted mb-0">Click <strong>Catalogs</strong> in the top menu. Select a project to view its
+                    song list. These pages are optimized for tablet use on stage.</p>
+            </div>
+            <div class="list-group-item p-4">
+                <h5 class="fw-bold mb-2"><span class="badge bg-success me-2">3</span> Print for Rehearsals</h5>
+                <p class="text-muted mb-0">On any Catalog page, click <strong>Print Catalog</strong>. A specialized
+                    print mode hides the menus, giving you a clean paper-ready copy.</p>
+            </div>
+            <div class="list-group-item p-4">
+                <h5 class="fw-bold mb-2"><span class="badge bg-success me-2">4</span> Use Resources</h5>
+                <p class="text-muted mb-0">Songs can link to <strong>YouTube videos</strong> <i
+                        class="fa-brands fa-youtube text-danger"></i> and <strong>lead sheet charts</strong> <i
+                        class="fa-solid fa-scroll text-info"></i>. Look for the icons in the Resources column.</p>
+            </div>
+        </div>
+
+        <!-- Product Specifications -->
+        <div class="mt-5 bg-dark rounded-4 p-4 p-md-5 text-white shadow">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="fw-bold mb-4 text-info"><i class="fa-solid fa-microchip me-2"></i> Product Specifications
+                    </h3>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-3"><i class="fa-solid fa-check text-success me-2"></i> <strong>Runtime:</strong>
+                            ASP.NET Core 8.0 MVC</li>
+                        <li class="mb-3"><i class="fa-solid fa-check text-success me-2"></i> <strong>Database:</strong>
+                            MS SQL Server with EF Core Migrations</li>
+                        <li class="mb-3"><i class="fa-solid fa-check text-success me-2"></i> <strong>Auth:</strong>
+                            Identity Core with role-based access</li>
+                        <li class="mb-3"><i class="fa-solid fa-check text-success me-2"></i> <strong>UI:</strong>
+                            Bootstrap 5 / FontAwesome 6 / Custom CSS</li>
+                        <li class="mb-3"><i class="fa-solid fa-check text-success me-2"></i>
+                            <strong>Performance:</strong> Async, AsNoTracking, Gzip compression</li>
+                    </ul>
+                </div>
+                <div class="col-md-6 d-none d-md-block text-center opacity-25">
+                    <i class="fa-solid fa-server fa-10x"></i>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</div>

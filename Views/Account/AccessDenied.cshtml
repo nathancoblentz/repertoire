@@ -1,0 +1,23 @@
+<!--
+    Access Denied View
+    This view is displayed when a user tries to access a page that they do not have permission to view.
+-->
+
+@{
+    ViewData["Title"] = "Access Denied";
+}
+
+<div class="container text-center mt-5">
+    <div class="card shadow border-danger mx-auto" style="max-width: 500px;">
+        <div class="card-body py-5">
+            <i class="fa-solid fa-circle-exclamation text-danger fa-4x mb-4"></i>
+            <h2 class="text-danger">Access Denied</h2>
+            <p class="lead">You do not have permission to view this page.</p>
+            <hr />
+            <p class="text-muted small">Please log in with an administrator account to continue.</p>
+            <a asp-controller="Home" asp-action="Index" asp-area="" class="btn btn-outline-primary mt-3">
+                <i class="fa-solid fa-house"></i> Return Home
+            </a>
+        </div>
+    </div>
+</div>

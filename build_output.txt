@@ -1,0 +1,18 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(11,23): warning CS8618: Non-nullable property 'Title' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(13,23): warning CS8618: Non-nullable property 'Artist' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(16,23): warning CS8618: Non-nullable property 'Project' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(19,23): warning CS8618: Non-nullable property 'Status' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+  CoblentzContext -> c:\Users\18643\source\repos\CoblentzContext\bin\Debug\net9.0\CoblentzContext.dll
+
+Build succeeded.
+
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(11,23): warning CS8618: Non-nullable property 'Title' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(13,23): warning CS8618: Non-nullable property 'Artist' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(16,23): warning CS8618: Non-nullable property 'Project' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+c:\Users\18643\source\repos\CoblentzContext\Models\Song.cs(19,23): warning CS8618: Non-nullable property 'Status' must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring the property as nullable. [c:\Users\18643\source\repos\CoblentzContext\CoblentzContext.csproj]
+    4 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:03.83

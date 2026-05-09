@@ -1,0 +1,93 @@
+@model Song
+@{
+    string action = ViewBag.Action ?? "Add";
+    ViewData["Title"] = action + " Song";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white p-4">
+                    <h3 class="mb-0">
+                        <i class="fa-solid @(action == "Add" ? "fa-circle-plus" : "fa-file-pen")"></i> 
+                        @action Song
+                    </h3>
+                </div>
+                <div class="card-body p-4 p-md-5">
+                    <form asp-area="Admin" asp-action="Edit" method="post">
+                        <div asp-validation-summary="All" class="text-danger mb-4 small"></div>
+
+                        <div class="mb-4">
+                            <label asp-for="Title" class="form-label fw-bold small text-uppercase">
+                                <i class="fa-solid fa-music text-primary me-2"></i> Song Title
+                            </label>
+                            <input asp-for="Title" class="form-control form-control-lg shadow-sm" placeholder="e.g. Bohemian Rhapsody" />
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Artist" class="form-label fw-bold small text-uppercase">
+                                <i class="fa-solid fa-user-tie text-primary me-2"></i> Artist / Band
+                            </label>
+                            <input asp-for="Artist" class="form-control form-control-lg shadow-sm" placeholder="e.g. Queen" />
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="ProjectId" class="form-label fw-bold small text-uppercase">
+                                    <i class="fa-solid fa-folder text-primary me-2"></i> Project
+                                </label>
+                                <select asp-for="ProjectId" class="form-select form-select-lg shadow-sm" 
+                                        asp-items="@(new SelectList(ViewBag.Projects, "ProjectId", "Name"))">
+                                    <option value="">-- Choose Project --</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="Status" class="form-label fw-bold small text-uppercase">
+                                    <i class="fa-solid fa-star text-primary me-2"></i> Current Status
+                                </label>
+                                <select asp-for="Status" class="form-select form-select-lg shadow-sm">
+                                    <option value="Ready">Ready</option>
+                                    <option value="Learning">Learning</option>
+                                    <option value="Requested">Requested</option>
+                                    <option value="New">New</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="YouTubeUrl" class="form-label fw-bold small text-uppercase">
+                                    <i class="fa-brands fa-youtube text-danger me-2"></i> YouTube Link
+                                </label>
+                                <input asp-for="YouTubeUrl" class="form-control shadow-sm" placeholder="https://www.youtube.com/watch?v=..." />
+                            </div>
+                            <div class="col-sm-6 mb-4">
+                                <label asp-for="SongChart" class="form-label fw-bold small text-uppercase">
+                                    <i class="fa-solid fa-scroll text-info me-2"></i> Chart / Lead Sheet
+                                </label>
+                                <input asp-for="SongChart" class="form-control shadow-sm" placeholder="https://link-to-chart.com/..." />
+                            </div>
+                        </div>
+
+                        <input type="hidden" asp-for="SongId" />
+                        <input type="hidden" asp-for="UserId" />
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary btn-lg px-4 me-md-2">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg px-5 shadow">
+                                <i class="fa-solid fa-save"></i> Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <p class="text-center text-muted mt-4 small">
+                All changes are saved permanently to the master repertoire database.
+            </p>
+        </div>
+    </div>
+</div>

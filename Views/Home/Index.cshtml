@@ -1,0 +1,211 @@
+<!--
+viewbag.sessiontime
+-->
+
+@model IEnumerable<Song>
+@{
+    // Set the title of the page
+    ViewData["Title"] = "My Repertoire";
+    // Count the total number of songs
+    var totalSongs = Model.Count();
+    // Count the number of songs that are ready
+    var readyCount = Model.Count(s => s.Status.ToLower() == "ready");
+    // Count the number of songs that are learning
+    var learningCount = totalSongs - readyCount;
+    // Count the number of projects
+    var projectCount = Model.Select(s => s.ProjectId).Distinct().Count();
+    var favIds = (List<int>?)ViewBag.FavoriteSongIds ?? new List<int>();
+    var favCount = favIds.Count;
+}
+
+<!-- Hero Header -->
+<div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+    <div>
+        <h1 class="display-1 fw-bold mb-1 text-gradient"><i class="fa-solid fa-guitar"></i> Master Repertoire</h1>
+        <p class="lead text-muted mb-0">Your complete song database at a glance.</p>
+    </div>
+    <span class="badge fs-6 py-2 px-3 glass-card shadow-premium border-0 text-primary">
+        <i class="fa-solid fa-clock me-1"></i> Session Started: @ViewBag.SessionTime
+    </span>
+</div>
+
+<!-- Stats Dashboard -->
+<div class="row g-3 mb-4">
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-premium hover-lift glass-card text-center py-3 h-100">
+            <div class="card-body p-2">
+                <div class="display-6 fw-bold text-primary">@totalSongs</div>
+                <small class="text-muted text-uppercase fw-bold opacity-75">Total Songs</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-premium hover-lift glass-card text-center py-3 h-100">
+            <div class="card-body p-2">
+                <div class="display-6 fw-bold text-success">@readyCount</div>
+                <small class="text-muted text-uppercase fw-bold opacity-75">Stage Ready</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-premium hover-lift glass-card text-center py-3 h-100">
+            <div class="card-body p-2">
+                <div class="display-6 fw-bold text-warning">@learningCount</div>
+                <small class="text-muted text-uppercase fw-bold opacity-75">In Progress</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 col-md-3">
+        <div class="card border-0 shadow-premium hover-lift glass-card text-center py-3 h-100">
+            <div class="card-body p-2">
+                <div class="display-6 fw-bold text-danger">@favCount</div>
+                <small class="text-muted text-uppercase fw-bold opacity-75">Favorites</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Song Table -->
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-transparent d-flex justify-content-between align-items-center py-3 flex-wrap gap-3">
+        <div class="d-flex align-items-center">
+            <h5 class="mb-0 fw-bold me-3"><i class="fa-solid fa-list me-2"></i> All Songs</h5>
+            <span class="badge bg-primary rounded-pill d-none d-sm-inline-block">@totalSongs songs across @projectCount projects</span>
+        </div>
+        <div class="ms-md-auto">
+            <div class="input-group input-group-sm" style="max-width: 300px;">
+                <span class="input-group-text bg-light border-end-0 text-muted">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </span>
+                <input type="text" id="songSearch" class="form-control border-start-0 ps-0" placeholder="Filter songs or artists..." aria-label="Search songs">
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover align-middle mb-0">
+                <thead class="table-dark">
+                    <tr>
+                        <th class="ps-4 sortable" data-sort="text" style="cursor: pointer;">Title <i class="fa-solid fa-sort ms-1 opacity-50 small"></i></th>
+                        <th class="sortable" data-sort="text" style="cursor: pointer;">Artist <i class="fa-solid fa-sort ms-1 opacity-50 small"></i></th>
+                        <th class="sortable d-none d-lg-table-cell" data-sort="text" style="cursor: pointer;">Project <i class="fa-solid fa-sort ms-1 opacity-50 small"></i></th>
+                        <th class="text-center sortable d-none d-md-table-cell" data-sort="text" style="cursor: pointer;">Status <i class="fa-solid fa-sort ms-1 opacity-50 small"></i></th>
+                        <th class="text-center">Res.</th>
+                        <th class="text-center">Fav.</th>
+                    </tr>
+                </thead>
+                <tbody id="songTableBody">
+                    @foreach (var song in Model)
+                    {
+                        var isFav = favIds.Contains(song.SongId);
+                        <tr>
+                            <td class="text-muted ps-4 fw-bold">@song.Title</td>
+                            <td class="text-muted">@song.Artist</td>
+                            <td class="d-none d-lg-table-cell">
+                                <a asp-controller="Project" asp-action="Details" asp-route-id="@(song.Project?.ProjectId ?? 0)" class="text-decoration-none">
+                                    <span class="badge bg-secondary bg-opacity-75">@(song.Project?.Name ?? "No Project")</span>
+                                </a>
+                            </td>
+                            <td class="text-center d-none d-md-table-cell">
+                                @{
+                                    string badgeClass = song.Status.ToLower() switch {
+                                        "ready" => "bg-success",
+                                        "learning" => "bg-warning text-dark",
+                                        "requested" => "bg-secondary",
+                                        "new" => "bg-info text-dark",
+                                        _ => "bg-secondary"
+                                    };
+                                }
+                                <span class="badge @badgeClass bg-opacity-75 px-3">@song.Status</span>
+                            </td>
+                            <td class="text-center">
+                                @if (!string.IsNullOrEmpty(song.YouTubeUrl))
+                                {
+                                    <a href="@song.YouTubeUrl" target="_blank" class="text-danger me-2" title="Watch on YouTube">
+                                        <i class="fa-brands fa-youtube fa-lg"></i>
+                                    </a>
+                                }
+                                @if (!string.IsNullOrEmpty(song.SongChart))
+                                {
+                                    <a href="@song.SongChart" target="_blank" class="text-info" title="View Chart / Lead Sheet">
+                                        <i class="fa-solid fa-scroll fa-lg"></i>
+                                    </a>
+                                }
+                            </td>
+                            <td class="text-center">
+                                <a class="btn @(isFav ? "btn-danger" : "btn-outline-danger") btn-sm rounded-circle shadow-sm" 
+                                   asp-controller="Home" 
+                                   asp-action="@(isFav ? "Remove" : "Add")" 
+                                   asp-area="" 
+                                   asp-route-id="@song.SongId"
+                                   title="@(isFav ? "Remove from Favorites" : "Add to Favorites")">
+                                    <i class="fa-solid fa-heart"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Live song filtering
+            $("#songSearch").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#songTableBody tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            // Table sorting logic
+            $('th.sortable').click(function() {
+                var table = $(this).parents('table').eq(0);
+                var tbody = table.find('tbody');
+                var rows = tbody.find('tr').toArray().sort(comparer($(this).index()));
+                this.asc = !this.asc;
+                if (!this.asc) { rows = rows.reverse(); }
+                for (var i = 0; i < rows.length; i++) { tbody.append(rows[i]); }
+                
+                // Update icons
+                table.find('th i').addClass('opacity-50').removeClass('fa-sort-up fa-sort-down').addClass('fa-sort');
+                $(this).find('i').removeClass('opacity-50 fa-sort').addClass(this.asc ? 'fa-sort-up' : 'fa-sort-down');
+            });
+
+            function comparer(index) {
+                return function(a, b) {
+                    var valA = getCellValue(a, index), valB = getCellValue(b, index);
+                    return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.toString().localeCompare(valB);
+                };
+            }
+
+            function getCellValue(row, index) { 
+                return $(row).children('td').eq(index).text(); 
+            }
+
+            // Heart pulse animation on click
+            $(".btn-sm.rounded-circle").on("mousedown", function() {
+                var heart = $(this).find("i");
+                heart.addClass("fa-beat");
+                setTimeout(() => {
+                    heart.removeClass("fa-beat");
+                }, 1000);
+            });
+        });
+    </script>
+    <style>
+        .fa-beat {
+            animation: bpx-heart-pulse 0.6s ease-in-out;
+        }
+        @@keyframes bpx-heart-pulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.4); }
+            60% { transform: scale(1.1); }
+            80% { transform: scale(1.45); }
+            100% { transform: scale(1); }
+        }
+    </style>
+}
